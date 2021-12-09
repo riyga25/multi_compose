@@ -1,5 +1,5 @@
 plugins {
-    id("org.jetbrains.compose") version "1.0.0-alpha3"
+    id("org.jetbrains.compose") version "1.0.0"
     id("com.android.application")
     kotlin("android")
 }
@@ -8,11 +8,11 @@ group = "me.antonlabachou"
 version = "1.0"
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 31
     defaultConfig {
         applicationId = "me.antonlabachou.android"
-        minSdkVersion(24)
-        targetSdkVersion(30)
+        minSdk = 24
+        targetSdk = 31
         versionCode = 1
         versionName = "1.0"
     }
