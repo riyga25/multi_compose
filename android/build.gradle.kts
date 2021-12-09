@@ -31,7 +31,3 @@ dependencies {
     implementation(project(":common"))
     implementation("androidx.activity:activity-compose:1.4.0")
 }
-
-repositories {
-    jcenter()
-}
