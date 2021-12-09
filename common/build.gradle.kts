@@ -4,10 +4,15 @@ plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose") version "1.0.0"
     id("com.android.library")
+    kotlin("plugin.serialization")
 }
 
 group = "me.antonlabachou"
 version = "1.0"
+
+val ktorVersion = "1.6.7"
+val coroutinesVersion = "1.5.2"
+val serializationVersion = "1.3.1"
 
 kotlin {
     android()
@@ -22,17 +27,38 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material)
+
+                api("org.jetbrains.kotlinx:kotlinx-serialization-core:${serializationVersion}")
+
+                // HTTP
+                implementation("io.ktor:ktor-client-core:${ktorVersion}")
+                implementation("io.ktor:ktor-client-json:${ktorVersion}")
+                implementation("io.ktor:ktor-client-serialization:${ktorVersion}")
+                implementation("io.ktor:ktor-client-logging:$ktorVersion")
+
+                // Coroutines
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutinesVersion}")
+
+                // DI
+                implementation("org.kodein.di:kodein-di:7.9.0")
             }
         }
         val androidMain by getting {
             dependencies {
                 api("androidx.appcompat:appcompat:1.4.0")
                 api("androidx.core:core-ktx:1.7.0")
+
+                // HTTP
+                implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
             }
         }
         val desktopMain by getting {
             dependencies {
                 api(compose.preview)
+
+                // HTTP
+//                implementation("io.ktor:ktor-client-curl:$ktorVersion")
+                implementation("io.ktor:ktor-client-cio:${ktorVersion}")
             }
         }
     }

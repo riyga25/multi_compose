@@ -15,3 +15,4 @@ include(":android")
 include(":desktop")
 include(":common")
 
+//enableFeaturePreview("GRADLE_METADATA")

@@ -1,20 +1,28 @@
 package me.antonlabachou.common
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
 import androidx.compose.material.Button
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
+import me.antonlabachou.common.di.EngineSDK
+import me.antonlabachou.common.features.cats.hubble
 
 @Composable
 fun App() {
     var text by remember { mutableStateOf("Hello, World!") }
+    var news by remember { mutableStateOf("null") }
 
-    Button(onClick = {
-        text = "Hello, ${getPlatformName()}"
-    }) {
-        Text(text)
+    Column {
+        Button(onClick = {
+            text = "Hello, ${getPlatformName()}"
+        }) {
+            Text(text)
+        }
+        Text(news)
+
+        LaunchedEffect(Unit) {
+            val result = EngineSDK.hubble.hubbleRepository.fetchNews()
+            news = result.fact
+        }
     }
 }
