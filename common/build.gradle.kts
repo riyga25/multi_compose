@@ -2,9 +2,9 @@ import org.jetbrains.compose.compose
 
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version "1.0.0"
-    id("com.android.library")
     kotlin("plugin.serialization")
+    id("org.jetbrains.compose")
+    id("com.android.library")
 }
 
 group = "me.antonlabachou"
@@ -16,11 +16,7 @@ val serializationVersion = "1.3.1"
 
 kotlin {
     android()
-    jvm("desktop") {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
-        }
-    }
+    jvm("desktop")
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -57,7 +53,6 @@ kotlin {
                 api(compose.preview)
 
                 // HTTP
-//                implementation("io.ktor:ktor-client-curl:$ktorVersion")
                 implementation("io.ktor:ktor-client-cio:${ktorVersion}")
             }
         }
