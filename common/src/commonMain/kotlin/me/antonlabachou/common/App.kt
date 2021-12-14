@@ -19,10 +19,10 @@ fun App() {
             Text(text)
         }
         Text(news)
+    }
 
-        LaunchedEffect(Unit) {
-            val result = EngineSDK.hubble.hubbleRepository.fetchNews()
-            news = result.fact
-        }
+    LaunchedEffect(Unit) {
+        val result = EngineSDK.hubble.hubbleRepository.fetchNews()
+        news = result.fact
     }
 }
